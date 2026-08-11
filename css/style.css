@@ -80,9 +80,9 @@ body, html {
 }
 
 .main-site-title {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Uncial Antiqua', sans-serif;
   font-size: clamp(1.8rem, 5vw, 3.2rem);
-  font-weight: 900;
+  font-weight: 1000;
   text-transform: uppercase;
   color: var(--retro-blue);
   text-shadow: 
@@ -112,6 +112,9 @@ body, html {
 
 .main-content-wrapper.hide-branding .retro-header-vibe {
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  display: none; /* Completely hides the header text from view and layout */
 }
 
 /* BOOMBOX VIEWPORT */
@@ -136,7 +139,7 @@ body, html {
   transition: opacity 0.05s ease-out;
 }
 
-/* BOOMBOX CHASSIS (FLUID SCALED FOR MOBILE) */
+/* BOOMBOX CHASSIS (FLUID SCALED FOR MOBILE)
 .boombox-body {
   position: relative;
   z-index: 2;
@@ -159,7 +162,7 @@ transform-origin: bottom right;
   overflow-y: auto;
   
 
-}
+}*/
 
 /* HIDE AMBIENT BEAT GLOW IN TV / FULL VIDEO MODE */
 .main-content-wrapper.hide-branding .beat-ambient-glow {
@@ -171,7 +174,7 @@ transform-origin: bottom right;
 
 
 /* MINIMIZED BOOMBOX (10% DOCKED BOTTOM-RIGHT) */
-.boombox-body.minimized-mode {
+/*.boombox-body.minimized-mode {
   position: fixed;
   bottom: 50px;
   right: 900px;
@@ -181,6 +184,56 @@ transform-origin: bottom right;
   cursor: pointer;
   box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px #00F3FF;
   z-index: 150;
+}*/
+
+/* Base boombox styles */
+/* Base boombox styles */
+.boombox-body {
+  position: relative;
+  z-index: 100;
+  width: min(720px, 95vw);
+  max-height: calc(100vh - 160px);
+  max-height: calc(100dvh - 160px);
+  background: var(--chassis-main);
+  border: clamp(3px, 1vw, 5px) solid #222;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35), 
+              0 0 calc(20px + (var(--beat-glow) * 30px)) var(--beat-color);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(8px, 2vw, 16px);
+  gap: clamp(6px, 1.5vw, 12px);
+  user-select: none;
+  pointer-events: auto;
+  overflow-y: auto;
+  transform-origin: bottom center;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* MINIMIZED MODE (Fixed transform & scaling) */
+.boombox-body.minimized-mode {
+  transform: translateY(calc(100% - 180px)) scale(0.3) !important;
+  opacity: 0.9;
+  cursor: pointer;
+  animation: beatPulse 0.8s infinite alternate ease-in-out;
+}
+
+/* Hover effect on minimized state */
+.boombox-body.minimized-mode:hover {
+  transform: translateY(calc(100% - 180px)) scale(0.32) !important;
+  opacity: 1;
+}
+
+/* Beat pulsation keyframes */
+@keyframes beatPulse {
+  0% {
+    box-shadow: 0 -2px 5px rgba(0, 243, 255, 0.3), 0 0 10px rgba(0, 243, 255, 0.2);
+    opacity: 0.75;
+  }
+  100% {
+    box-shadow: 0 -4px 15px rgba(0, 243, 255, 0.9), 0 0 25px rgba(0, 243, 255, 0.7);
+    opacity: 1;
+  }
 }
 
 /* HARDWARE COMPONENTS */
@@ -243,8 +296,34 @@ transform-origin: bottom right;
 .deck-btn { flex: 1; background: linear-gradient(180deg, #FFF 0%, #CCC 100%); border: 1px solid #111; border-radius: 3px; font-family: 'Orbitron', sans-serif; font-size: clamp(0.45rem, 1vw, 0.6rem); font-weight: 800; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .deck-btn:active { transform: translateY(2px); background: var(--accent-orange); color: #FFF; }
 
-.bottom-accent-bar { width: 100%; height: 20px; background: #1E1E22; border: 2px solid #111; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0; }
-#dots-beat-bar { width: 100%; height: 100%; display: block; }
+/*.bottom-accent-bar { width: 100%; height: 20px; background: #1E1E22; border: 2px solid #111; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0; }
+#dots-beat-bar { width: 100%; height: 100%; display: block; }*/
+.player-wrapper {
+  position: relative;
+  width: 100%;
+}
+/* Accent control bar (stays layer-fixed on top) */
+.bottom-accent-bar {
+  width: 100%;
+  height: 20px;
+  background: #1E1E22;
+  border: 2px solid #111;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  z-index: 101; /* Keeps control bar visually on top */
+}
+
+#dots-beat-bar { 
+  width: 100%; 
+  height: 100%; 
+  display: block; 
+}
+
 
 /* BOTTOM FLOATING CONTROL BAR (MOBILE RESPONSIVE) */
 .bottom-control-bar {

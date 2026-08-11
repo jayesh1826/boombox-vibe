@@ -154,22 +154,71 @@ body, html {
   gap: clamp(6px, 1.5vw, 12px);
   user-select: none;
   pointer-events: auto;
-  transform-origin: bottom right;
+transform-origin: bottom right;
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, box-shadow 0.4s ease;
   overflow-y: auto;
+  
+
 }
 
+/* HIDE AMBIENT BEAT GLOW IN TV / FULL VIDEO MODE */
+.main-content-wrapper.hide-branding .beat-ambient-glow {
+  opacity: 0 !important;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+
+
 /* MINIMIZED BOOMBOX (10% DOCKED BOTTOM-RIGHT) */
-.boombox-body.minimized-mode {
+/*.boombox-body.minimized-mode {
   position: fixed;
-  bottom: 80px;
-  right: 15px;
-  width: 320px;
-  transform: scale(0.35) !important;
+  bottom: 50px;
+  right: 900px;
+  width: 700px;
+  transform: scale(0.20) !important;
   opacity: 0.92;
   cursor: pointer;
   box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 25px #00F3FF;
   z-index: 150;
+}*/
+
+/* Base boombox styles */
+.boombox-body {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  transform-origin: bottom center; /* Anchor to top so it scales downwards under the bar */
+  position: relative;
+  z-index: 100;
+}
+
+/* Minimized mode: scaled to 30% and shifted so 10px peeks out under the 20px bar */
+.boombox-body.minimized-mode {
+  /* Shifts down by 20px (bar height) minus 10px (visible peek) */
+  transform: translateY(100% - 10px) scale(0.3) !important;
+  opacity: 0.9;
+  cursor: pointer;
+  
+  /* Continuous flashing/pulsing glow with the beat */
+  animation: beatPulse 0.8s infinite alternate ease-in-out;
+}
+
+/* Hover effect on minimized state */
+.boombox-body.minimized-mode:hover {
+  /* Peeks out slightly more on hover for interaction feedback */
+  transform: translateY(100% - 16px) scale(0.32) !important;
+  opacity: 1;
+}
+
+/* Beat pulsation keyframes */
+@keyframes beatPulse {
+  0% {
+    box-shadow: 0 -2px 5px rgba(0, 243, 255, 0.3), 0 0 10px rgba(0, 243, 255, 0.2);
+    opacity: 0.75;
+  }
+  100% {
+    box-shadow: 0 -4px 15px rgba(0, 243, 255, 0.9), 0 0 25px rgba(0, 243, 255, 0.7);
+    opacity: 1;
+  }
 }
 
 /* HARDWARE COMPONENTS */
@@ -232,8 +281,34 @@ body, html {
 .deck-btn { flex: 1; background: linear-gradient(180deg, #FFF 0%, #CCC 100%); border: 1px solid #111; border-radius: 3px; font-family: 'Orbitron', sans-serif; font-size: clamp(0.45rem, 1vw, 0.6rem); font-weight: 800; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .deck-btn:active { transform: translateY(2px); background: var(--accent-orange); color: #FFF; }
 
-.bottom-accent-bar { width: 100%; height: 20px; background: #1E1E22; border: 2px solid #111; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0; }
-#dots-beat-bar { width: 100%; height: 100%; display: block; }
+/*.bottom-accent-bar { width: 100%; height: 20px; background: #1E1E22; border: 2px solid #111; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 0; }
+#dots-beat-bar { width: 100%; height: 100%; display: block; }*/
+.player-wrapper {
+  position: relative;
+  width: 100%;
+}
+/* Accent control bar (stays layer-fixed on top) */
+.bottom-accent-bar {
+  width: 100%;
+  height: 20px;
+  background: #1E1E22;
+  border: 2px solid #111;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  z-index: 101; /* Keeps control bar visually on top */
+}
+
+#dots-beat-bar { 
+  width: 100%; 
+  height: 100%; 
+  display: block; 
+}
+
 
 /* BOTTOM FLOATING CONTROL BAR (MOBILE RESPONSIVE) */
 .bottom-control-bar {
