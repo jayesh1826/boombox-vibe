@@ -263,7 +263,19 @@ function initBeatVisualizer() {
       beatIntensity = 0;
       simulatedPhase = 0;
     }
-
+const glowValue = isVideoModeActive ? 0 : beatIntensity.toFixed(2);
+  document.documentElement.style.setProperty('--beat-glow', glowValue);
+  
+  const glowEl = document.querySelector('.beat-ambient-glow');
+  if (glowEl) {
+    if (isVideoModeActive) {
+      glowEl.style.opacity = '0';
+      glowEl.style.visibility = 'hidden';
+    } else {
+      glowEl.style.visibility = 'visible';
+      glowEl.style.opacity = (0.12 + beatIntensity * 0.45).toString();
+    }
+  }
     document.documentElement.style.setProperty('--beat-color', '#E66A2B');
     document.documentElement.style.setProperty('--beat-glow', beatIntensity.toFixed(2));
 
