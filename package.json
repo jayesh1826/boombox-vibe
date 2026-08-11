@@ -1,13 +1,11 @@
-﻿{
-  "name": "lets-vibe-retro-radio",
+{
+  "name": "boombox-vibe",
   "version": "1.0.0",
-  "description": "Indian Retro YouTube Radio Station",
-  "main": "server.js",
+  "description": "Retro Boombox Music Player by kritrails",
+  "main": "index.html",
   "scripts": {
-    "start": "node server.js"
+    "start": "npx serve ."
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
-  }
+  "author": "kritrails",
+  "license": "MIT"
 }
