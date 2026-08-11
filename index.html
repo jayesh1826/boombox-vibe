@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOMBOX VIBE - Retro Radio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Blurred Song Video Background -->
+  <div class="video-bg-container" id="video-container">
+    <div id="bg-video-player"></div>
+    <div class="video-blur-overlay" id="video-overlay"></div>
+  </div>
+
+  <!-- Content Layout Wrapper -->
+  <div class="main-content-wrapper">
+
+    <!-- Retro Text Branding Header -->
+    <header class="retro-header-vibe">
+      <h1 class="main-site-title" data-text="BOOMBOX VIBE">BOOMBOX VIBE</h1>
+      <p class="site-tagline">RETRO CASSETTE STATION | 104.1 FM</p>
+    </header>
+
+    <!-- Center Interaction Layer -->
+    <div class="boombox-viewport">
+      <div class="beat-ambient-glow" id="beat-glow"></div>
+
+      <!-- Retro Boombox Chassis -->
+      <div class="boombox-body" id="boombox-chassis" title="Click to enlarge boombox">
+        
+        <!-- Top Radio Frequency Tuner Bar -->
+        <div class="tuner-section">
+          <div class="tuner-scale">
+            <div class="tuner-needle" id="tuner-needle"></div>
+          </div>
+          <div class="tuner-knob"></div>
+        </div>
+
+        <!-- Control Panel: Sliders & Knobs -->
+        <div class="control-panel">
+          <div class="eq-sliders">
+            <div class="eq-track"><div class="eq-thumb"></div></div>
+            <div class="eq-track"><div class="eq-thumb"></div></div>
+            <div class="eq-track"><div class="eq-thumb"></div></div>
+            <div class="eq-track"><div class="eq-thumb"></div></div>
+          </div>
+
+          <div class="vu-meters">
+            <div class="vu-meter"><div class="vu-needle" id="vu-left"></div></div>
+            <div class="vu-meter"><div class="vu-needle" id="vu-right"></div></div>
+          </div>
+
+          <div class="rotary-knobs">
+            <div class="dial-knob"></div>
+            <div class="dial-knob"></div>
+          </div>
+        </div>
+
+        <!-- Main Speaker & Tape Deck Layout -->
+        <div class="hardware-middle">
+          
+          <!-- Left Speaker Cone -->
+          <div class="speaker-housing left-speaker">
+            <div class="tweeter"></div>
+            <div class="main-cone" id="left-cone"><div class="dust-cap"></div></div>
+          </div>
+
+          <!-- Cassette Deck Slot -->
+          <div class="cassette-deck-housing" id="cassette-slot">
+            <div class="deck-window">
+              
+              <!-- Draggable Interactive Cassette Tape -->
+              <div class="cassette-tape inserted" id="cassette-tape" title="Drag & drop into deck to PLAY, or pull out to STOP!">
+                <div class="tape-label">
+                  <span id="cassette-song-title">LET'S VIBE MIX</span>
+                </div>
+                <div class="tape-spools">
+                  <div class="spool left-spool spinning" id="left-spool"><div class="spool-teeth"></div></div>
+                  <div class="spool right-spool spinning" id="right-spool"><div class="spool-teeth"></div></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Mechanical Deck Transport Buttons -->
+            <div class="deck-buttons">
+              <button class="deck-btn btn-play" id="btn-power">PLAY</button>
+              <button class="deck-btn btn-stop" id="btn-eject">EJECT</button>
+              <button class="deck-btn btn-random" id="btn-random">NEXT</button>
+            </div>
+          </div>
+
+          <!-- Right Speaker Cone -->
+          <div class="speaker-housing right-speaker">
+            <div class="tweeter"></div>
+            <div class="main-cone" id="right-cone"><div class="dust-cap"></div></div>
+          </div>
+
+        </div>
+
+        <!-- HORIZONTAL BLACK BAR BEAT VISUALIZER -->
+        <div class="bottom-accent-bar" title="Music Beat Dot Visualizer">
+          <canvas id="dots-beat-bar"></canvas>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Floating Control Bar -->
+  <div class="bottom-control-bar">
+    <div class="horizontal-volume-container" id="horizontal-vol-bar" title="Drag or click to adjust volume">
+      <div class="vol-bar-bg"></div>
+      <div class="vol-bar-fill" id="vol-bar-fill"></div>
+      <div class="vol-bar-handle" id="vol-bar-handle"></div>
+    </div>
+
+    <div class="control-bar-content">
+      <div class="track-meta">
+        <div class="title" id="curr-title">Loading track...</div>
+        <div class="artist" id="curr-artist">Retro Radio Station</div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="main-cta" id="btn-vibe">🎲 RANDOM VIBE</button>
+        <button class="ctrl-btn video-toggle-btn" id="btn-video-mode" title="Toggle Clear Fullscreen Video Mode">📺</button>
+        <button class="ctrl-btn" id="btn-toggle">▶</button>
+        <a id="yt-music-link" href="#" target="_blank" class="ctrl-btn yt-music-btn" title="Open in YouTube Music">🎵</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main YouTube Player Engine -->
+  <div class="hidden-yt-engine">
+    <div id="yt-player"></div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
